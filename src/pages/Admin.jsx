@@ -17,7 +17,7 @@ export default function Admin() {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch('/api/contacts');
+      const res = await fetch('https://scentaromatic.com/loopsolution/');
       const data = await res.json();
       if (data.status === 'success') {
         setContacts(data.data);
@@ -34,7 +34,7 @@ export default function Admin() {
     fetchContacts();
 
     // Setup SSE for real-time notifications
-    const sse = new EventSource('/api/contacts');
+    const sse = new EventSource('https://scentaromatic.com/loopsolution/');
 
     sse.onmessage = (event) => {
       try {

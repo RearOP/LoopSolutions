@@ -68,7 +68,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/contacts', {
+      const response = await fetch('https://scentaromatic.com/loopsolution/', {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
