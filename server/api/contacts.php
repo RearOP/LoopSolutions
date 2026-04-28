@@ -32,15 +32,15 @@ $pdo->exec("
 ");
 
 // Helper to notify the Node Load Balancer
-// function notifyLoadBalancer($data)
-// {
-//     $ch = curl_init('http://localhost:8000/internal/trigger-notification');
-//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-//     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-//     curl_exec($ch);
-//     curl_close($ch);
-// }
+function notifyLoadBalancer($data)
+{
+    $ch = curl_init('http://localhost:8000/internal/trigger-notification');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    curl_exec($ch);
+    curl_close($ch);
+}
 
 // Handle GET request (Admin fetch)
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Notify Node LB
         $data['id'] = $insertedId;
         $data['created_at'] = date('Y-m-d H:i:s');
-        // notifyLoadBalancer($data);
+        notifyLoadBalancer($data);
 
         http_response_code(201);
         echo json_encode(["status" => "success", "message" => "Contact saved successfully", "id" => $insertedId]);

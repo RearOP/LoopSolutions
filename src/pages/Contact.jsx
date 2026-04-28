@@ -70,9 +70,13 @@ export default function Contact() {
     try {
       const response = await fetch('/api/contacts', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(formData)
       });
+      const result = await response.json();
+      console.log(result);
       if (response.ok) {
         setSubmitted(true);
         // Add a slight delay to ensure the DOM has updated and element exists
@@ -82,6 +86,7 @@ export default function Contact() {
             { y: 0, opacity: 1, scale: 1, duration: 0.6, ease: 'elastic.out(1, 0.5)' }
           );
         }, 50);
+
       } else {
         alert('Failed to send message. Please try again.');
       }
