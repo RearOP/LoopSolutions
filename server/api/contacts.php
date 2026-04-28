@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Notify Node LB
         $data['id'] = $insertedId;
         $data['created_at'] = date('Y-m-d H:i:s');
-        notifyLoadBalancer($data);
+        // notifyLoadBalancer($data);
 
         http_response_code(201);
         echo json_encode(["status" => "success", "message" => "Contact saved successfully", "id" => $insertedId]);
