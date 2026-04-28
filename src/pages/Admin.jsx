@@ -17,7 +17,7 @@ export default function Admin() {
 
   const fetchContacts = async () => {
     try {
-      const res = await fetch('http://localhost:8080/loopportfolio/server/api/contacts.php');
+      const res = await fetch('https://loopsolutions.free.nf/server/api/contacts.php');
       const data = await res.json();
       if (data.status === 'success') {
         setContacts(data.data);
@@ -34,7 +34,7 @@ export default function Admin() {
     fetchContacts();
 
     // Setup SSE for real-time notifications
-    const sse = new EventSource('http://localhost:8080/loopportfolio/server/api/contacts.php');
+    const sse = new EventSource('https://loopsolutions.free.nf/server/api/contacts.php');
 
     sse.onmessage = (event) => {
       try {

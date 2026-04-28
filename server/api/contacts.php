@@ -11,10 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Database setup (MySQL)
-$dbHost = getenv('DB_HOST') ?: 'localhost';
-$dbName = getenv('DB_NAME') ?: 'loopportfolio';
-$dbUser = getenv('DB_USER') ?: 'root';
-$dbPass = getenv('DB_PASS') ?: '';
+$dbHost = getenv('DB_HOST') ?: 'sql304.infinityfree.com';
+$dbName = getenv('DB_NAME') ?: 'if0_41776323_loopportfolio';
+$dbUser = getenv('DB_USER') ?: 'if0_41776323';
+$dbPass = getenv('DB_PASS') ?: '4OgRMuaCSRIr';
 
 $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName;charset=utf8mb4", $dbUser, $dbPass);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -32,14 +32,15 @@ $pdo->exec("
 ");
 
 // Helper to notify the Node Load Balancer
-function notifyLoadBalancer($data) {
-    $ch = curl_init('http://localhost:8000/internal/trigger-notification');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    curl_exec($ch);
-    curl_close($ch);
-}
+// function notifyLoadBalancer($data)
+// {
+//     $ch = curl_init('http://localhost:8000/internal/trigger-notification');
+//     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+//     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+//     curl_exec($ch);
+//     curl_close($ch);
+// }
 
 // Handle GET request (Admin fetch)
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -69,9 +70,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':company' => $data['company'] ?? '',
             ':message' => $data['message']
         ]);
-        
+
         $insertedId = $pdo->lastInsertId();
-        
+
         // Notify Node LB
         $data['id'] = $insertedId;
         $data['created_at'] = date('Y-m-d H:i:s');
