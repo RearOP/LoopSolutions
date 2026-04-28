@@ -32,7 +32,7 @@ function AnimatedRoutes() {
         <Route path="/services/graphic-branding" element={<GraphicBrandingServices />} />
         <Route path="/work" element={<Work />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/my-secret-admin-panel" element={<Admin />} />
+        <Route path="/admin-panel" element={<Admin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
