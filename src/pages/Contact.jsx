@@ -75,8 +75,8 @@ export default function Contact() {
         },
         body: JSON.stringify(formData)
       });
-      const result = await response.json();
-      console.log(result);
+      // const result = await response.json();
+      console.log(response);
       if (response.ok) {
         setSubmitted(true);
         // Add a slight delay to ensure the DOM has updated and element exists
